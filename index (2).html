@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anyk — and now you know</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Syne:wght@400;500;700&family=Syne+Mono&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET & ROOT ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --choco: #2A1810;
+      --choco-mid: #3a1f14;
+      --card-bg: #5a1a3a;
+      --card-hover: #6b2048;
+      --flag-deep-orange: #D62900;
+      --flag-orange: #FF9B55;
+      --flag-white: #FFF4F0;
+      --flag-pink: #D461A6;
+      --flag-deep-rose: #A50062;
+      --baby-pink: #F5B8D0;
+      --bp-muted: rgba(245,184,208,0.6);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--choco);
+      color: var(--baby-pink);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(42,24,16,0.96);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 48px;
+      border-bottom: 0.5px solid rgba(245,184,208,0.1);
+    }
+    .nav::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg,#D62900,#FF9B55,#FFF4F0,#D461A6,#A50062);
+    }
+    .nav-logo {
+      font-family: 'Syncopate', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.5em; color: var(--flag-orange);
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 9px; font-weight: 400; letter-spacing: 0.18em;
+      color: var(--baby-pink); text-decoration: none;
+      text-transform: uppercase; cursor: pointer;
+      transition: color 0.2s; opacity: 0.65;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--flag-pink); opacity: 1; }
+
+    /* ── PAGE SECTIONS ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ════════════════════════════════
+       HOME PAGE
+    ════════════════════════════════ */
+    .hero { text-align: center; padding: 36px 20px 0; }
+    .hero-tagline {
+      font-family: 'Syne', sans-serif; font-size: 13px;
+      font-style: italic; color: var(--baby-pink);
+      letter-spacing: 0.1em; margin-bottom: 10px; opacity: 0.85;
+    }
+    .hero-eyebrow {
+      font-family: 'Syne Mono', monospace; font-size: 8px;
+      letter-spacing: 0.45em; color: var(--flag-orange);
+      text-transform: uppercase; margin-bottom: 10px; opacity: 0.7;
+    }
+    .hero-title {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(44px,8vw,80px); font-weight: 700;
+      letter-spacing: 0.18em; color: var(--flag-white);
+      text-transform: uppercase; line-height: 1;
+      position: relative; display: inline-block;
+    }
+    .hero-title::before, .hero-title::after {
+      content: 'ANYK'; position: absolute; top: 0; left: 0; width: 100%; overflow: hidden;
+    }
+    .hero-title::before {
+      color: var(--flag-pink);
+      clip-path: polygon(0 28%,100% 28%,100% 46%,0 46%);
+      transform: translateX(-3px); opacity: 0.45; animation: ga 5s infinite;
+    }
+    .hero-title::after {
+      color: var(--flag-orange);
+      clip-path: polygon(0 62%,100% 62%,100% 76%,0 76%);
+      transform: translateX(3px); opacity: 0.35; animation: gb 6s infinite 1s;
+    }
+    @keyframes ga {
+      0%,88%,100%{transform:translateX(-3px);opacity:.45}
+      91%{transform:translateX(5px) scaleX(1.01);opacity:.7}
+      94%{transform:translateX(-2px);opacity:.25}
+    }
+    @keyframes gb {
+      0%,86%,100%{transform:translateX(3px);opacity:.35}
+      89%{transform:translateX(-5px) scaleX(.99);opacity:.6}
+      93%{transform:translateX(2px);opacity:.2}
+    }
+
+    /* Mandala */
+    .mandala-stage {
+      display: flex; justify-content: center; align-items: center;
+      padding: 0 20px 36px; overflow: visible;
+    }
+    .mandala-wrap { position: relative; width: 560px; height: 560px; flex-shrink: 0; overflow: visible; }
+    @media (min-width: 1024px) {
+      .mandala-wrap { width: 1400px; height: 1400px; overflow: visible; }
+      .ring-1 { width: 1400px; height: 1400px; }
+      .ring-2 { width: 1280px; height: 1280px; }
+      .ring-3 { width: 1100px; height: 1100px; }
+      .ring-4 { width: 480px; height: 480px; }
+      .ring-5 { width: 330px; height: 330px; }
+      .p-archive { transform: translate(calc(-50%), calc(-50% - 560px)); width: 280px; }
+      .p-art     { transform: translate(calc(-50% + 560px), calc(-50%)); width: 250px; }
+      .p-scitech { transform: translate(calc(-50%), calc(-50% + 560px)); width: 280px; }
+      .p-blog    { transform: translate(calc(-50% - 560px), calc(-50%)); width: 250px; }
+      .mandala-wrap.bloomed .p-archive { animation: bloom-top-lg 0.7s cubic-bezier(.22,.68,0,1.15) forwards; }
+      .mandala-wrap.bloomed .p-art     { animation: bloom-right-lg 0.7s cubic-bezier(.22,.68,0,1.15) 0.08s forwards; }
+      .mandala-wrap.bloomed .p-scitech { animation: bloom-bottom-lg 0.7s cubic-bezier(.22,.68,0,1.15) 0.16s forwards; }
+      .mandala-wrap.bloomed .p-blog    { animation: bloom-left-lg 0.7s cubic-bezier(.22,.68,0,1.15) 0.24s forwards; }
+      .mandala-wrap.collapsing .p-archive { animation: collapse-top-lg 0.5s cubic-bezier(.4,0,.6,1) forwards; }
+      .mandala-wrap.collapsing .p-art     { animation: collapse-right-lg 0.5s cubic-bezier(.4,0,.6,1) 0.04s forwards; }
+      .mandala-wrap.collapsing .p-scitech { animation: collapse-bottom-lg 0.5s cubic-bezier(.4,0,.6,1) 0.08s forwards; }
+      .mandala-wrap.collapsing .p-blog    { animation: collapse-left-lg 0.5s cubic-bezier(.4,0,.6,1) 0.12s forwards; }
+    }
+    @keyframes bloom-top-lg    { from{transform:translate(calc(-50%),calc(-50% - 560px));opacity:.4} to{transform:translate(calc(-50%),calc(-50% - 660px)) scale(1.05);opacity:1} }
+    @keyframes bloom-right-lg  { from{transform:translate(calc(-50% + 560px),calc(-50%));opacity:.4} to{transform:translate(calc(-50% + 660px),calc(-50%)) scale(1.05);opacity:1} }
+    @keyframes bloom-bottom-lg { from{transform:translate(calc(-50%),calc(-50% + 560px));opacity:.4} to{transform:translate(calc(-50%),calc(-50% + 660px)) scale(1.05);opacity:1} }
+    @keyframes bloom-left-lg   { from{transform:translate(calc(-50% - 560px),calc(-50%));opacity:.4} to{transform:translate(calc(-50% - 660px),calc(-50%)) scale(1.05);opacity:1} }
+    @keyframes collapse-top-lg    { from{transform:translate(calc(-50%),calc(-50% - 660px)) scale(1.05)} to{transform:translate(calc(-50%),calc(-50% - 560px))} }
+    @keyframes collapse-right-lg  { from{transform:translate(calc(-50% + 660px),calc(-50%)) scale(1.05)} to{transform:translate(calc(-50% + 560px),calc(-50%))} }
+    @keyframes collapse-bottom-lg { from{transform:translate(calc(-50%),calc(-50% + 660px)) scale(1.05)} to{transform:translate(calc(-50%),calc(-50% + 560px))} }
+    @keyframes collapse-left-lg   { from{transform:translate(calc(-50% - 660px),calc(-50%)) scale(1.05)} to{transform:translate(calc(-50% - 560px),calc(-50%))} }
+    .mandala-rotate {
+      position: absolute; inset: 0;
+      animation: mandalaSpin 40s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes mandalaSpin { to { transform: rotate(360deg); } }
+    .ring {
+      position: absolute; border-radius: 50%; border: 0.5px solid;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .ring-1 { width: 560px; height: 560px; border-color: rgba(245,184,208,0.07); }
+    .ring-2 { width: 500px; height: 500px; border-color: rgba(212,97,166,0.11); }
+    .ring-3 { width: 430px; height: 430px; border-color: rgba(245,184,208,0.05); border-style: dashed; }
+    .ring-4 { width: 200px; height: 200px; border-color: rgba(212,97,166,0.18); }
+    .ring-5 { width: 140px; height: 140px; border-color: rgba(255,155,85,0.22); border-style: dashed; }
+    .spokes {
+      position: absolute; width: 100%; height: 100%;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .petal {
+      position: absolute; width: 168px;
+      background: var(--card-bg);
+      border: 0.5px solid rgba(245,184,208,0.13);
+      border-radius: 3px; padding: 18px 16px 14px;
+      cursor: pointer; top: 50%; left: 50%;
+      text-decoration: none; display: block;
+      transition: border-color 0.25s, box-shadow 0.3s, filter 0.25s;
+      user-select: none; -webkit-user-select: none;
+    }
+    .petal::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; transition: height 0.25s;
+    }
+    .petal:hover::before { height: 4px; }
+    .petal:hover { border-color: rgba(212,97,166,0.55); box-shadow: 0 8px 32px rgba(0,0,0,0.55); filter: brightness(1.12); }
+    .p-archive { transform: translate(calc(-50% + 0px),calc(-50% - 212px)); width: 190px; }
+    .p-archive::before { background: var(--flag-deep-orange); }
+    .p-art { transform: translate(calc(-50% + 212px),calc(-50% + 0px)); }
+    .p-art::before { background: var(--flag-pink); }
+    .p-scitech { transform: translate(calc(-50% + 0px),calc(-50% + 212px)); width: 190px; }
+    .p-scitech::before { background: var(--flag-orange); }
+    .p-blog { transform: translate(calc(-50% - 212px),calc(-50% + 0px)); }
+    .p-blog::before { background: var(--flag-deep-rose); }
+
+    /* Bloom animations */
+    .mandala-wrap.bloomed .p-archive { animation: bloom-top 0.7s cubic-bezier(.22,.68,0,1.15) forwards; }
+    .mandala-wrap.bloomed .p-art     { animation: bloom-right 0.7s cubic-bezier(.22,.68,0,1.15) 0.08s forwards; }
+    .mandala-wrap.bloomed .p-scitech { animation: bloom-bottom 0.7s cubic-bezier(.22,.68,0,1.15) 0.16s forwards; }
+    .mandala-wrap.bloomed .p-blog    { animation: bloom-left 0.7s cubic-bezier(.22,.68,0,1.15) 0.24s forwards; }
+    .mandala-wrap.collapsing .p-archive { animation: collapse-top 0.5s cubic-bezier(.4,0,.6,1) forwards; }
+    .mandala-wrap.collapsing .p-art     { animation: collapse-right 0.5s cubic-bezier(.4,0,.6,1) 0.04s forwards; }
+    .mandala-wrap.collapsing .p-scitech { animation: collapse-bottom 0.5s cubic-bezier(.4,0,.6,1) 0.08s forwards; }
+    .mandala-wrap.collapsing .p-blog    { animation: collapse-left 0.5s cubic-bezier(.4,0,.6,1) 0.12s forwards; }
+    @keyframes bloom-top    { from{transform:translate(calc(-50%),calc(-50% - 212px));opacity:0.4} to{transform:translate(calc(-50%),calc(-50% - 268px)) scale(1.05);opacity:1} }
+    @keyframes bloom-right  { from{transform:translate(calc(-50% + 212px),calc(-50%));opacity:0.4} to{transform:translate(calc(-50% + 268px),calc(-50%)) scale(1.05);opacity:1} }
+    @keyframes bloom-bottom { from{transform:translate(calc(-50%),calc(-50% + 212px));opacity:0.4} to{transform:translate(calc(-50%),calc(-50% + 268px)) scale(1.05);opacity:1} }
+    @keyframes bloom-left   { from{transform:translate(calc(-50% - 212px),calc(-50%));opacity:0.4} to{transform:translate(calc(-50% - 268px),calc(-50%)) scale(1.05);opacity:1} }
+    @keyframes collapse-top    { from{transform:translate(calc(-50%),calc(-50% - 268px)) scale(1.05)} to{transform:translate(calc(-50%),calc(-50% - 212px))} }
+    @keyframes collapse-right  { from{transform:translate(calc(-50% + 268px),calc(-50%)) scale(1.05)} to{transform:translate(calc(-50% + 212px),calc(-50%))} }
+    @keyframes collapse-bottom { from{transform:translate(calc(-50%),calc(-50% + 268px)) scale(1.05)} to{transform:translate(calc(-50%),calc(-50% + 212px))} }
+    @keyframes collapse-left   { from{transform:translate(calc(-50% - 268px),calc(-50%)) scale(1.05)} to{transform:translate(calc(-50% - 212px),calc(-50%))} }
+
+    /* Emblem */
+    .emblem {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 120px; height: 120px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; z-index: 10; cursor: pointer;
+    }
+    .emblem-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(212,97,166,0.35);
+      background: radial-gradient(circle,rgba(165,0,98,0.18) 0%,rgba(42,24,16,0.92) 70%);
+      transition: border-color 0.3s;
+    }
+    .emblem:hover .emblem-ring { border-color: rgba(212,97,166,0.7); }
+    .emblem-inner { position: absolute; inset: 14px; border-radius: 50%; border: 0.5px solid rgba(255,155,85,0.22); }
+    .emblem-logo {
+      font-family: 'Syncopate', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.3em; color: var(--flag-white); position: relative; z-index: 2; text-transform: uppercase;
+    }
+    .emblem-hint {
+      font-family: 'Syne Mono', monospace; font-size: 6px; letter-spacing: 0.2em;
+      color: var(--bp-muted); position: relative; z-index: 2;
+      text-transform: uppercase; margin-top: 4px; transition: color 0.2s;
+    }
+    .emblem:hover .emblem-hint { color: var(--flag-pink); }
+    .emblem-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--flag-pink); margin: 4px auto 0;
+      position: relative; z-index: 2;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.7);opacity:0.55} }
+
+    /* Petal card internals */
+    .card-num { font-family: 'Syne Mono', monospace; font-size: 7px; letter-spacing: 0.3em; color: var(--bp-muted); text-transform: uppercase; margin-bottom: 8px; }
+    .card-title { font-family: 'Syncopate', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.1; color: var(--flag-white); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .card-title .sub { display: block; font-size: 0.75em; color: var(--flag-pink); letter-spacing: 0.18em; margin-top: 1px; }
+    .card-desc { font-size: 10.5px; color: var(--bp-muted); line-height: 1.65; margin-bottom: 10px; }
+    .card-pills { display: flex; flex-wrap: wrap; gap: 3px; }
+    .card-pill {
+      font-family: 'Cinzel', serif; font-size: 6.5px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 2px 6px; border: 0.5px solid rgba(245,184,208,0.16);
+      border-radius: 2px; color: var(--bp-muted); white-space: nowrap; transition: all 0.2s;
+    }
+    .petal:hover .card-pill { border-color: rgba(212,97,166,0.35); color: var(--flag-pink); }
+    .blog-subs { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+    .blog-sub { display: flex; align-items: center; gap: 7px; padding: 5px 8px; border: 0.5px solid rgba(245,184,208,0.1); border-radius: 2px; transition: all 0.2s; }
+    .blog-sub:hover { border-color: rgba(165,0,98,0.4); background: rgba(165,0,98,0.06); }
+    .blog-sub-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+    .dot-t { background: var(--flag-pink); }
+    .dot-r { background: var(--flag-deep-rose); }
+    .blog-sub-name { font-family: 'Syncopate', sans-serif; font-size: 6.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--baby-pink); }
+    .blog-sub-tag { font-size: 9.5px; color: var(--bp-muted); margin-left: auto; }
+
+    /* ════════════════════════════════
+       ARCHIVE PAGE
+    ════════════════════════════════ */
+    .section-page { padding: 40px 0 80px; }
+    .section-header { padding: 0 48px 40px; border-bottom: 0.5px solid rgba(245,184,208,0.1); margin-bottom: 32px; }
+    .section-eyebrow { font-family: 'Syne Mono', monospace; font-size: 8px; letter-spacing: 0.45em; color: var(--flag-orange); text-transform: uppercase; margin-bottom: 12px; opacity: 0.8; }
+    .section-title { font-family: 'Syncopate', sans-serif; font-size: clamp(28px,5vw,52px); font-weight: 700; letter-spacing: 0.08em; color: var(--flag-white); text-transform: uppercase; line-height: 1; margin-bottom: 20px; }
+    .section-title span { color: var(--flag-pink); }
+    .section-intro { font-size: 13px; color: var(--bp-muted); line-height: 1.8; max-width: 560px; }
+    .section-intro strong { color: var(--baby-pink); font-weight: 500; }
+    .section-intro em { font-style: italic; }
+
+    /* Cat nav */
+    .cat-nav { padding: 0 48px 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .cat-pill {
+      font-family: 'Cinzel', serif; font-size: 8px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 6px 14px; border: 0.5px solid rgba(245,184,208,0.2); border-radius: 2px;
+      color: var(--baby-pink); cursor: pointer; transition: all 0.2s; background: transparent;
+    }
+    .cat-pill:hover { border-color: rgba(212,97,166,0.5); color: #fff; background: rgba(212,97,166,0.08); }
+    .cat-pill.active { border-color: var(--flag-pink); color: #fff; background: rgba(212,97,166,0.1); }
+    .cat-section { display: none; padding: 0 48px; }
+    .cat-section.visible { display: block; }
+    .cat-section-header { margin-bottom: 28px; padding-bottom: 14px; border-bottom: 0.5px solid rgba(245,184,208,0.08); }
+    .cat-section-num { font-family: 'Syne Mono', monospace; font-size: 7.5px; letter-spacing: 0.3em; color: var(--bp-muted); text-transform: uppercase; margin-bottom: 6px; }
+    .cat-section-title { font-family: 'Syncopate', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: var(--flag-white); text-transform: uppercase; }
+    .cat-section-desc { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: var(--bp-muted); margin-top: 8px; line-height: 1.7; max-width: 480px; }
+
+    .alpha-group { margin-bottom: 24px; }
+    .alpha-letter { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: rgba(212,97,166,0.5); text-transform: uppercase; padding: 10px 0 6px; border-top: 0.5px solid rgba(245,184,208,0.07); margin-bottom: 2px; }
+    .brand-entry { padding: 20px 22px; background: var(--card-bg); border-left: 2px solid rgba(212,97,166,0.3); transition: all 0.2s; margin-bottom: 2px; }
+    .brand-entry:hover { background: var(--card-hover); border-left-color: var(--flag-pink); }
+    .brand-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; font-style: italic; color: var(--flag-white); margin-bottom: 4px; }
+    .brand-founder { font-family: 'Syne Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--flag-orange); margin-bottom: 8px; }
+    .brand-desc { font-size: 12.5px; color: var(--bp-muted); line-height: 1.75; margin-bottom: 10px; max-width: 560px; }
+    .brand-links { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .brand-link {
+      font-family: 'Cinzel', serif; font-size: 8px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 5px 12px; border: 0.5px solid rgba(245,184,208,0.25); border-radius: 2px;
+      color: var(--baby-pink); text-decoration: none; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .brand-link:hover { border-color: var(--flag-pink); color: #fff; background: rgba(212,97,166,0.1); }
+    .brand-link.primary { border-color: rgba(255,155,85,0.4); color: var(--flag-orange); }
+    .brand-link.primary:hover { border-color: var(--flag-orange); background: rgba(255,155,85,0.08); color: #fff; }
+    .brand-tag { font-family: 'Cinzel', serif; font-size: 7px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: rgba(165,0,98,0.2); color: #F0A0C8; border: 0.5px solid rgba(165,0,98,0.35); }
+    .coming-soon { padding: 20px 22px; background: rgba(90,26,58,0.35); border-left: 2px solid rgba(245,184,208,0.08); margin-bottom: 2px; }
+    .coming-soon-title { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: var(--bp-muted); margin-bottom: 4px; }
+    .coming-soon-desc { font-size: 12px; color: rgba(245,184,208,0.35); line-height: 1.6; }
+
+    /* ════════════════════════════════
+       BLOG PAGE
+    ════════════════════════════════ */
+    .sub-toggle { padding: 0 48px 28px; display: flex; gap: 10px; }
+    .sub-btn {
+      font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 700;
+      font-style: italic; letter-spacing: 0.06em;
+      padding: 8px 22px; border: 0.5px solid rgba(245,184,208,0.25); border-radius: 2px;
+      color: var(--baby-pink); cursor: pointer; background: transparent; transition: all 0.2s;
+    }
+    .sub-btn:hover { border-color: rgba(212,97,166,0.5); color: #fff; background: rgba(212,97,166,0.08); }
+    .sub-btn.active { border-color: var(--flag-pink); color: #fff; background: rgba(212,97,166,0.1); }
+    .sub-btn.thoughts-btn.active { border-color: var(--flag-deep-rose); color: #FFD6EB; background: rgba(165,0,98,0.1); }
+    .sub-section { display: none; padding: 0 48px; }
+    .sub-section.visible { display: block; }
+
+    .month-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .month-btn {
+      font-family: 'Cinzel', serif; font-size: 8px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 6px 14px; border: 0.5px solid rgba(245,184,208,0.2); border-radius: 2px;
+      color: var(--baby-pink); cursor: pointer; background: transparent; transition: all 0.2s;
+    }
+    .month-btn:hover { border-color: rgba(212,97,166,0.4); color: #fff; }
+    .month-btn.active { border-color: var(--flag-pink); color: #fff; background: rgba(212,97,166,0.08); }
+    .month-group { display: none; }
+    .month-group.visible { display: block; }
+    .month-label { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600; letter-spacing: 0.25em; color: rgba(212,97,166,0.45); text-transform: uppercase; padding: 0 0 16px; border-bottom: 0.5px solid rgba(245,184,208,0.06); margin-bottom: 20px; }
+
+    .entry { background: var(--card-bg); border-left: 2px solid rgba(212,97,166,0.3); padding: 24px 24px 20px; margin-bottom: 2px; transition: all 0.2s; }
+    .entry:hover { background: var(--card-hover); border-left-color: var(--flag-pink); }
+    .entry.thoughts-entry { border-left-color: rgba(165,0,98,0.35); }
+    .entry.thoughts-entry:hover { border-left-color: var(--flag-deep-rose); }
+    .entry-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .entry-date { font-family: 'Syne Mono', monospace; font-size: 9px; letter-spacing: 0.25em; color: var(--flag-orange); }
+    .entry-type-badge { font-family: 'Cinzel', serif; font-size: 7px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 2px 9px; border-radius: 2px; }
+    .badge-review { background: rgba(212,97,166,0.2); color: #F5B8D0; border: 0.5px solid rgba(212,97,166,0.4); }
+    .badge-thought { background: rgba(165,0,98,0.2); color: #F0A0C8; border: 0.5px solid rgba(165,0,98,0.4); }
+    .entry-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; font-style: italic; color: var(--flag-white); margin-bottom: 12px; line-height: 1.3; }
+    .entry-body { font-size: 13px; color: var(--bp-muted); line-height: 1.85; margin-bottom: 14px; max-width: 600px; }
+    .entry-body strong { color: var(--baby-pink); font-weight: 500; }
+    .perfume-notes { margin-top: 12px; padding: 10px 14px; border-left: 1.5px solid rgba(255,155,85,0.4); background: rgba(0,0,0,0.15); }
+    .perfume-notes-label { font-family: 'Cinzel', serif; font-size: 7px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--flag-orange); margin-bottom: 5px; }
+    .perfume-notes-list { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: var(--bp-muted); line-height: 1.7; }
+    .star-rating { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+    .stars { display: flex; gap: 3px; }
+    .star { width: 14px; height: 14px; }
+    .star svg { width: 14px; height: 14px; }
+    .star-count { font-family: 'Syne Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: var(--bp-muted); }
+    .signoff { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: rgba(245,184,208,0.7); margin-top: 14px; }
+
+    /* ════════════════════════════════
+       CONTACT PAGE
+    ════════════════════════════════ */
+    .contact-page { padding: 48px 40px 60px; }
+    .contact-header { text-align: center; margin-bottom: 52px; }
+    .contact-radial { position: relative; width: 420px; height: 420px; margin: 0 auto; }
+    .contact-ring-deco { position: absolute; border-radius: 50%; border: 0.5px solid; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .cr1 { width: 420px; height: 420px; border-color: rgba(245,184,208,0.07); }
+    .cr2 { width: 320px; height: 320px; border-color: rgba(212,97,166,0.1); border-style: dashed; animation: cspin 50s linear infinite; }
+    .cr3 { width: 130px; height: 130px; border-color: rgba(255,155,85,0.18); }
+    @keyframes cspin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .contact-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
+    .contact-center-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(212,97,166,0.3); background: radial-gradient(circle,rgba(165,0,98,0.15) 0%,rgba(42,24,16,0.95) 70%); }
+    .contact-center-text { font-family: 'Syncopate', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.3em; color: var(--flag-white); position: relative; z-index: 2; text-transform: uppercase; }
+    .contact-center-sub { font-family: 'Syne Mono', monospace; font-size: 6px; letter-spacing: 0.2em; color: var(--bp-muted); position: relative; z-index: 2; margin-top: 3px; text-transform: uppercase; }
+    .social-node { position: absolute; top: 50%; left: 50%; width: 90px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; z-index: 10; transition: transform 0.3s cubic-bezier(.22,.68,0,1.2); }
+    .social-node:hover { transform: var(--pos) scale(1.12) !important; }
+    .sn-fable  { --pos: translate(calc(-50%),   calc(-50% - 160px)); transform: translate(calc(-50%),   calc(-50% - 160px)); }
+    .sn-insta  { --pos: translate(calc(-50% + 160px), calc(-50%));   transform: translate(calc(-50% + 160px), calc(-50%));   }
+    .sn-tiktok { --pos: translate(calc(-50%),   calc(-50% + 160px)); transform: translate(calc(-50%),   calc(-50% + 160px)); }
+    .sn-news   { --pos: translate(calc(-50% - 160px), calc(-50%));   transform: translate(calc(-50% - 160px), calc(-50%));   }
+    .social-icon-wrap { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 0.5px solid rgba(245,184,208,0.18); background: var(--card-bg); margin-bottom: 7px; transition: all 0.25s; }
+    .social-node:hover .social-icon-wrap { border-color: rgba(212,97,166,0.5); background: rgba(165,0,98,0.2); }
+    .social-label { font-family: 'Cinzel', serif; font-size: 7px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bp-muted); text-align: center; transition: color 0.2s; }
+    .social-node:hover .social-label { color: var(--flag-pink); }
+    .contact-spokes { position: absolute; width: 420px; height: 420px; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+
+    /* ── SHARED UTILITIES ── */
+    .back-top {
+      display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+      padding: 20px 0 0; transition: opacity 0.2s; opacity: 0.55;
+      font-family: 'Cinzel', serif; font-size: 8px; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--baby-pink);
+      background: none; border: none;
+    }
+    .back-top:hover { opacity: 1; color: var(--flag-pink); }
+    .footer {
+      padding: 14px 40px; display: flex; justify-content: space-between; align-items: center;
+      border-top: 0.5px solid rgba(245,184,208,0.07); margin-top: 40px;
+    }
+    .footer-copy { font-family: 'Syne Mono', monospace; font-size: 7px; letter-spacing: 0.22em; color: rgba(245,184,208,0.2); text-transform: uppercase; }
+    .footer-tag { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: rgba(245,184,208,0.18); }
+
+    /* SVG arrow helper */
+    .arr-ne { display: inline-block; vertical-align: middle; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 7.5px; }
+      .mandala-wrap { width: 340px; height: 340px; }
+      .ring-1 { width: 340px; height: 340px; }
+      .ring-2 { width: 300px; height: 300px; }
+      .ring-3 { width: 260px; height: 260px; }
+      .p-archive { transform: translate(calc(-50%),calc(-50% - 128px)); width: 140px; }
+      .p-art     { transform: translate(calc(-50% + 128px),calc(-50%)); width: 120px; }
+      .p-scitech { transform: translate(calc(-50%),calc(-50% + 128px)); width: 140px; }
+      .p-blog    { transform: translate(calc(-50% - 128px),calc(-50%)); width: 120px; }
+      .mandala-wrap.bloomed .p-archive { animation: bloom-top-sm 0.7s cubic-bezier(.22,.68,0,1.15) forwards; }
+      .mandala-wrap.bloomed .p-art     { animation: bloom-right-sm 0.7s cubic-bezier(.22,.68,0,1.15) 0.08s forwards; }
+      .mandala-wrap.bloomed .p-scitech { animation: bloom-bottom-sm 0.7s cubic-bezier(.22,.68,0,1.15) 0.16s forwards; }
+      .mandala-wrap.bloomed .p-blog    { animation: bloom-left-sm 0.7s cubic-bezier(.22,.68,0,1.15) 0.24s forwards; }
+      @keyframes bloom-top-sm    { from{transform:translate(calc(-50%),calc(-50% - 128px));opacity:.4} to{transform:translate(calc(-50%),calc(-50% - 168px)) scale(1.04);opacity:1} }
+      @keyframes bloom-right-sm  { from{transform:translate(calc(-50% + 128px),calc(-50%));opacity:.4} to{transform:translate(calc(-50% + 168px),calc(-50%)) scale(1.04);opacity:1} }
+      @keyframes bloom-bottom-sm { from{transform:translate(calc(-50%),calc(-50% + 128px));opacity:.4} to{transform:translate(calc(-50%),calc(-50% + 168px)) scale(1.04);opacity:1} }
+      @keyframes bloom-left-sm   { from{transform:translate(calc(-50% - 128px),calc(-50%));opacity:.4} to{transform:translate(calc(-50% - 168px),calc(-50%)) scale(1.04);opacity:1} }
+      .section-header, .cat-nav, .cat-section, .sub-section { padding-left: 20px; padding-right: 20px; }
+      .contact-page { padding: 32px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <a class="nav-logo" onclick="showPage('home')">Anyk</a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nl-home" class="active">Home</a></li>
+      <li><a onclick="showPage('archive')" id="nl-archive">Archive</a></li>
+      <li><a onclick="showPage('art')" id="nl-art">Art</a></li>
+      <li><a onclick="showPage('scitech')" id="nl-scitech">Sci&amp;Tech</a></li>
+      <li><a onclick="showPage('blog')" id="nl-blog">Blog</a></li>
+      <li><a onclick="showPage('contact')" id="nl-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════════════════════
+       HOME
+  ════════════════════════════════ -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <p class="hero-tagline">and now you know</p>
+      <p class="hero-eyebrow">Curated · Researched · Considered</p>
+      <h1 class="hero-title">ANYK</h1>
+    </div>
+    <div class="mandala-stage">
+      <div class="mandala-wrap" id="mandalaWrap">
+        <div class="mandala-rotate">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <div class="ring ring-4"></div>
+          <div class="ring ring-5"></div>
+          <svg class="spokes" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+            <line x1="280" y1="70"  x2="280" y2="490" stroke="rgba(212,97,166,0.08)" stroke-width="0.5"/>
+            <line x1="70"  y1="280" x2="490" y2="280" stroke="rgba(212,97,166,0.08)" stroke-width="0.5"/>
+            <line x1="131" y1="131" x2="429" y2="429" stroke="rgba(245,184,208,0.05)" stroke-width="0.5"/>
+            <line x1="429" y1="131" x2="131" y2="429" stroke="rgba(245,184,208,0.05)" stroke-width="0.5"/>
+            <circle cx="280" cy="60"  r="2.5" fill="rgba(212,97,166,0.25)"/>
+            <circle cx="500" cy="280" r="2.5" fill="rgba(255,155,85,0.25)"/>
+            <circle cx="280" cy="500" r="2.5" fill="rgba(165,0,98,0.3)"/>
+            <circle cx="60"  cy="280" r="2.5" fill="rgba(214,41,0,0.25)"/>
+            <circle cx="131" cy="131" r="1.5" fill="rgba(245,184,208,0.12)"/>
+            <circle cx="429" cy="131" r="1.5" fill="rgba(245,184,208,0.12)"/>
+            <circle cx="131" cy="429" r="1.5" fill="rgba(245,184,208,0.12)"/>
+            <circle cx="429" cy="429" r="1.5" fill="rgba(245,184,208,0.12)"/>
+            <path d="M200,280 Q280,200 360,280 Q280,360 200,280Z" fill="none" stroke="rgba(212,97,166,0.06)" stroke-width="0.5"/>
+          </svg>
+        </div>
+
+        <div class="petal p-archive" onclick="showPage('archive')">
+          <p class="card-num">01 — Archive</p>
+          <h2 class="card-title">Anyk <span class="sub">Archive</span></h2>
+          <p class="card-desc">Curated, researched brands across every category.</p>
+          <div class="card-pills">
+            <span class="card-pill">Accessories</span><span class="card-pill">Artists</span>
+            <span class="card-pill">Agri+</span><span class="card-pill">Books</span>
+            <span class="card-pill">Haircare</span><span class="card-pill">Makeup</span>
+            <span class="card-pill">Clothing</span><span class="card-pill">Scents</span>
+            <span class="card-pill">Skincare</span><span class="card-pill">Stationery</span>
+            <span class="card-pill">Wellness</span>
+          </div>
+        </div>
+
+        <div class="petal p-art" onclick="showPage('art')">
+          <p class="card-num">02 — Creative</p>
+          <h2 class="card-title">Anyk <span class="sub">Art</span></h2>
+          <p class="card-desc">Visual work, creative expression, and the artists behind it.</p>
+        </div>
+
+        <div class="petal p-scitech" onclick="showPage('scitech')">
+          <p class="card-num">03 — Science</p>
+          <h2 class="card-title">Anyk <span class="sub">Scitech</span></h2>
+          <p class="card-desc">Exploring science, technology, and what connects them.</p>
+        </div>
+
+        <div class="petal p-blog" onclick="showPage('blog')">
+          <p class="card-num">04 — Writing</p>
+          <h2 class="card-title">Anyk <span class="sub">Blog</span></h2>
+          <p class="card-desc">Reflective thoughts and honest reviews.</p>
+          <div class="blog-subs">
+            <div class="blog-sub"><div class="blog-sub-dot dot-t"></div><span class="blog-sub-name">Thoughts</span><span class="blog-sub-tag">Essays</span></div>
+            <div class="blog-sub"><div class="blog-sub-dot dot-r"></div><span class="blog-sub-name">Reviews</span><span class="blog-sub-tag">Honest takes</span></div>
+          </div>
+        </div>
+
+        <div class="emblem" id="emblem" onclick="toggleBloom()">
+          <div class="emblem-ring"></div>
+          <div class="emblem-inner"></div>
+          <span class="emblem-logo">Anyk</span>
+          <span class="emblem-hint" id="emblemHint">explore</span>
+          <div class="emblem-dot"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <span class="footer-copy">© Anyk — All rights reserved</span>
+      <span class="footer-tag">curated with intention</span>
+    </footer>
+  </div>
+
+  <!-- ════════════════════════════════
+       ARCHIVE
+  ════════════════════════════════ -->
+  <div id="page-archive" class="page">
+    <div class="section-page">
+      <div class="section-header">
+        <p class="section-eyebrow">01 — Living Archive</p>
+        <h1 class="section-title">Anyk <span>Archive</span></h1>
+        <p class="section-intro"><strong>Who gets my $?</strong> Trying to avoid anti-Black, anti-Palestinian shops? Or primarily white-owned, male-owned brands? Look no further. All brands here are researched, their founders and partners carefully reviewed, before being placed on this list. Mistakes happen, but character doesn't change for money. See someone on this list that's questionable? Let me know.</p>
+      </div>
+
+      <div class="cat-nav" id="catNav">
+        <button class="cat-pill active" onclick="showCat('accessories',this)">Accessories</button>
+        <button class="cat-pill" onclick="showCat('artists',this)">Artists</button>
+        <button class="cat-pill" onclick="showCat('agri',this)">Agri+</button>
+        <button class="cat-pill" onclick="showCat('books',this)">Books &amp; Booklists</button>
+        <button class="cat-pill" onclick="showCat('clothing',this)">Clothing</button>
+        <button class="cat-pill" onclick="showCat('haircare',this)">Haircare</button>
+        <button class="cat-pill" onclick="showCat('makeup',this)">Makeup</button>
+        <button class="cat-pill" onclick="showCat('scents',this)">Scents</button>
+        <button class="cat-pill" onclick="showCat('skincare',this)">Skincare</button>
+        <button class="cat-pill" onclick="showCat('stationery',this)">Stationery</button>
+        <button class="cat-pill" onclick="showCat('wellness',this)">Wellness</button>
+      </div>
+
+      <div class="cat-section visible" id="cat-accessories">
+        <div class="cat-section-header"><p class="cat-section-num">Category 01</p><h2 class="cat-section-title">Accessories</h2><p class="cat-section-desc">Jewelry, pins, hair ties — this is a home for all the little things.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">C</div>
+          <div class="brand-entry">
+            <div class="brand-name">Chunks</div>
+            <div class="brand-founder">Founded by Tiffany Ju</div>
+            <div class="brand-links">
+              <a class="brand-link primary" href="https://chunks.shop/" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+              <a class="brand-link" href="https://www.colleen.nz/archive/chunks-tiffany-ju" target="_blank">Colleen <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+              <a class="brand-link" href="https://bestie.femalefounderworld.com/podcasts/female-founder-world/episodes/2148661306" target="_blank">Female Founder World <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+              <a class="brand-link" href="https://www.graymag.com/post/chunks-makes-memphis-inspired-hair-candy-you-didn-t-know-you-needed" target="_blank">Gray Mag <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <div class="alpha-group">
+          <div class="alpha-letter">O</div>
+          <div class="brand-entry">
+            <div class="brand-name">Otsí:tsi'designs</div>
+            <div class="brand-founder">Founded by Rebecca Doxtator (she/they) — Oneida Nation of the Thames</div>
+            <div class="brand-desc">Rebecca started beading in 2014 and her work has transformed from a casual hobby to an artistic passion. She creates beautiful and unique beadwork — from earrings to bolo ties — with one-of-a-kind designs that bring a mix of traditional Ukwehuwé beadwork style with a pop culture twist.</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://otsitsidesigns.square.site/s/shop" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-artists">
+        <div class="cat-section-header"><p class="cat-section-num">Category 02</p><h2 class="cat-section-title">Artists</h2><p class="cat-section-desc">The vertebrae of our society.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">S</div>
+          <div class="brand-entry">
+            <div class="brand-name">Sadie Lew</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://sadielew.com/" target="_blank">Visit <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+          <div class="brand-entry" style="margin-top:2px">
+            <div class="brand-name">Sinclair Sexsmith</div>
+            <div class="brand-desc">A writer and teacher. Sugar Butch is Sinclair's blog and website about all things kink, queer, gender, and storied.</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://www.sugarbutch.net/about/" target="_blank">SugarButch <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-agri">
+        <div class="cat-section-header"><p class="cat-section-num">Category 03</p><h2 class="cat-section-title">Agri+</h2><p class="cat-section-desc">Agriculture is the backbone of our societies. Want to find the farmers, butchers, herbalists and support them in your area? Here's a list.</p></div>
+        <div class="coming-soon"><div class="coming-soon-title">More coming soon</div><div class="coming-soon-desc">This section is growing. Know a farmer, herbalist, or butcher worth adding? Send it our way.</div></div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-books">
+        <div class="cat-section-header"><p class="cat-section-num">Category 04</p><h2 class="cat-section-title">Books &amp; Booklists</h2><p class="cat-section-desc">We fighting illiteracy outchea.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">F</div>
+          <div class="brand-entry">
+            <div class="brand-name">Fiction Out of Africa</div>
+            <div class="brand-founder">A curated booklist — Fulton County Library, Atlanta GA</div>
+            <div class="brand-desc">A curated booklist featuring solely African authors for your reading. Current book count: 10. Host library system: Fulton County Library — Atlanta, GA.</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://fulcolibrary.bibliocommons.com/v2/list/display/2392599149/2608513429" target="_blank">View List <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+          <div class="brand-entry" style="margin-top:2px">
+            <div class="brand-name">Fulton County Library System</div>
+            <div class="brand-founder">Director: Gayle Holloman</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://www.fulcolibrary.org/" target="_blank">Visit <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-clothing">
+        <div class="cat-section-header"><p class="cat-section-num">Category 05</p><h2 class="cat-section-title">Clothing</h2><p class="cat-section-desc">Who said the revolution will be remembered for its style? Oh right, Vince Staples.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">V</div>
+          <div class="brand-entry">
+            <div class="brand-name">Voight</div>
+            <div class="brand-founder">Founded by Valentina Voight and creatives Nat Hernandez and Karl Darcy</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://voight.com/" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-haircare">
+        <div class="cat-section-header"><p class="cat-section-num">Category 06</p><h2 class="cat-section-title">Haircare</h2><p class="cat-section-desc">Because they still hate to see curls coming.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">B</div>
+          <div class="brand-entry">
+            <div class="brand-name">Bread</div>
+            <div class="brand-founder">Founded by Maeva Heim</div>
+            <div style="margin-bottom:10px"><span class="brand-tag">Black-owned</span></div>
+            <div class="brand-links">
+              <a class="brand-link primary" href="https://breadbeautysupply.com/collections/all" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+              <a class="brand-link" href="https://www.vogue.com/slideshow/how-bread-beauty-supply-founder-maeva-heim-made-the-change-she-wanted-to-see-in-the-industry" target="_blank">Vogue <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+              <a class="brand-link" href="https://www.thecut.com/2021/08/maeva-heim-bread-beauty-supply-scents.html" target="_blank">The Cut <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-makeup">
+        <div class="cat-section-header"><p class="cat-section-num">Category 07</p><h2 class="cat-section-title">Makeup</h2><p class="cat-section-desc">I love it, hate when it's not in my shade.</p></div>
+        <div class="coming-soon"><div class="coming-soon-title">More coming soon</div><div class="coming-soon-desc">This section is growing. Have a recommendation? Send it our way.</div></div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-scents">
+        <div class="cat-section-header"><p class="cat-section-num">Category 08</p><h2 class="cat-section-title">Scents</h2><p class="cat-section-desc">From candles to perfume, smell your way through to the good times.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">K</div>
+          <div class="brand-entry">
+            <div class="brand-name">Kayali</div>
+            <div class="brand-founder">Founded by Mona Kattan</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://us.kayali.com" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-skincare">
+        <div class="cat-section-header"><p class="cat-section-num">Category 09</p><h2 class="cat-section-title">Skincare</h2><p class="cat-section-desc">Everyone needs it and some of us do it. Here are the skincare brands not led by white folks.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">T</div>
+          <div class="brand-entry">
+            <div class="brand-name">Topicals</div>
+            <div class="brand-founder">Co-founded by Olamide Olowe and Claudia Teng</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://mytopicals.com/pages/about" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-stationery">
+        <div class="cat-section-header"><p class="cat-section-num">Category 10</p><h2 class="cat-section-title">Stationery</h2><p class="cat-section-desc">I love a good notebook and pen set. If you do too, this section's for you.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">C</div>
+          <div class="brand-entry">
+            <div class="brand-name">Cognitive Surplus</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://cognitive-surplus.com/" target="_blank">Shop <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <div class="cat-section" id="cat-wellness">
+        <div class="cat-section-header"><p class="cat-section-num">Category 11</p><h2 class="cat-section-title">Wellness Providers</h2><p class="cat-section-desc">Whether you've been picking up too much energy or letting go of too little, there's someone here to help guide you.</p></div>
+        <div class="alpha-group">
+          <div class="alpha-letter">A</div>
+          <div class="brand-entry">
+            <div class="brand-name">Hypnotic Aura Holistic</div>
+            <div class="brand-founder">Aura Jade — Decatur, GA</div>
+            <div class="brand-desc">A mother, creative, healer, mystic, and expanded person local to Decatur, GA. Hypnotic Aura Holistic is her personally curated space made to unlock the power of whole body mental and spiritual wellness for yourself, through yourself.</div>
+            <div class="brand-links"><a class="brand-link primary" href="https://hypnoticauraholistic.com/" target="_blank">Visit <svg class="arr-ne" width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="9" x2="9" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="4,1 9,1 9,6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a></div>
+          </div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <footer class="footer">
+        <span class="footer-copy">© Anyk Archive — All rights reserved</span>
+        <span class="footer-tag">curated with intention</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       ART (placeholder)
+  ════════════════════════════════ -->
+  <div id="page-art" class="page">
+    <div class="section-page">
+      <div class="section-header">
+        <p class="section-eyebrow">02 — Creative</p>
+        <h1 class="section-title">Anyk <span>Art</span></h1>
+        <p class="section-intro"><em>Visual work, creative expression, and the artists behind it. Coming soon.</em></p>
+      </div>
+      <footer class="footer">
+        <span class="footer-copy">© Anyk — All rights reserved</span>
+        <span class="footer-tag">curated with intention</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SCITECH (placeholder)
+  ════════════════════════════════ -->
+  <div id="page-scitech" class="page">
+    <div class="section-page">
+      <div class="section-header">
+        <p class="section-eyebrow">03 — Science</p>
+        <h1 class="section-title">Anyk <span>Scitech</span></h1>
+        <p class="section-intro"><em>Exploring science, technology, and what connects them. Coming soon.</em></p>
+      </div>
+      <footer class="footer">
+        <span class="footer-copy">© Anyk — All rights reserved</span>
+        <span class="footer-tag">curated with intention</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       BLOG
+  ════════════════════════════════ -->
+  <div id="page-blog" class="page">
+    <div class="section-page">
+      <div class="section-header">
+        <p class="section-eyebrow">04 — Writing</p>
+        <h1 class="section-title">Anyk <span>Blog</span></h1>
+        <p class="section-intro"><em>Of course a curator has opinions and wisdom. Two kinds of writing — honest reviews and reflective thoughts.</em></p>
+      </div>
+
+      <div class="sub-toggle">
+        <button class="sub-btn active" id="btn-reviews" onclick="showSub('reviews')">Reviews</button>
+        <button class="sub-btn thoughts-btn" id="btn-thoughts" onclick="showSub('thoughts')">Thoughts</button>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="sub-section visible" id="sub-reviews">
+        <div class="month-nav">
+          <button class="month-btn active" id="mbtn-jan" onclick="showMonth('jan',this)">January 2026</button>
+          <button class="month-btn" id="mbtn-feb" onclick="showMonth('feb',this)">February 2026</button>
+        </div>
+
+        <div class="month-group visible" id="month-jan">
+          <div class="month-label">January 2026</div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">01 / 12</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Topicals Slick Salve Lip Balm in Açaí</div>
+            <div class="entry-body">This is one of my favorite lip products I have ever used. The color is a beautiful berry, and it hydrates quickly. I have bought 3 so far, two of the mint version for my wife (who also loves it) and the açaí for me. I think it is worth the hype and the price, and after two months of consistent use there is still a sizable amount of product left. It also doesn't leave a white residue on your lips.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div></div><span class="star-count">5 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">01 / 19</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Kayali The Wedding Perfume (Silk Santal)</div>
+            <div class="entry-body">I bought 8 tester size versions and one travel size version of Kayali perfumes. I haven't ever been really into perfumes, as my mom had a scent sensitivity growing up, but that has made me just appreciate my natural scent. Lately though, I've loved the idea of leaving a lingering scent behind. The Wedding has a very mature, earthy, sweet smell to it. Almost like a musk, but more subtle. It reminds me of a loving embrace by an older woman. It's not my scent of choice, but it is definitely a lovely one!
+              <div class="perfume-notes"><div class="perfume-notes-label">Perfume Notes</div><div class="perfume-notes-list">Gourmand Floral · Sparkling Champagne · White Freesia · Blackcurrant · Pink Praline · Jasmine · Rose Damascena · Orange Blossom · Sugared Musk · Sandalwood · Oakmoss · Vanilla Absolute</div></div>
+            </div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">3 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">01 / 29</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Cosrx Low pH Good Morning Gel Cleanser</div>
+            <div class="entry-body">I bought this cleanser months ago not knowing it was the same one friends were suggesting purchasing while I was in Korea. I bought two, and I am almost done with the first. It was an inexpensive buy in Korea, even by American standards. It leaves the skin feeling so supple and hydrated, yet refreshed and clean. It is my go-to when my skin is acting up and needs a reset. Works great as the first step in cleansing.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div></div><span class="star-count">5 / 5</span></div>
+          </div>
+
+          <div class="entry entry-expandable" onclick="toggleEntryImg(this)" style="cursor:pointer;">
+            <div class="entry-meta"><span class="entry-date">01 / 29</span><span class="entry-type-badge badge-review">Review</span><span class="entry-img-hint" style="margin-left:auto;font-family:'Syne Mono',monospace;font-size:7.5px;letter-spacing:0.18em;color:rgba(245,184,208,0.45);text-transform:uppercase;">Tap to see photo</span></div>
+            <div class="entry-title">Euthymol Original (Whitening) Toothpaste</div>
+            <div class="entry-body">I really don't like this toothpaste, and I am at the point where I have used half the tube so I feel that is valid to say. The flavor is strong but too much to feel refreshing and doesn't last on the breath. I feel like it hasn't made neither my breath fresher (outside of general hygiene habits) nor my teeth whiter. Also, the tube is incredibly difficult to get product out of. One star for the toothpaste color itself being pink, which is probably not a good thing.</div>
+            <div class="entry-img-wrap" style="display:none;overflow:hidden;max-height:0;transition:max-height 0.4s ease;">
+              <img src="euthymol.jpg" alt="Euthymol Original Whitening Toothpaste tube on a pink background" style="width:100%;max-width:480px;display:block;margin:14px 0;border-radius:4px;"/>
+            </div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">1 / 5</span></div>
+          </div>
+          <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+        </div>
+
+        <div class="month-group" id="month-feb">
+          <div class="month-label">February 2026</div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 02</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Topicals Brightening &amp; Cleansing Bar (2ct)</div>
+            <div class="entry-body">So, I bought this in November, and it's now February and I am just now running thin on the 1st bar. Two will last you a while, at least an estimated four months. I haven't noticed a marked improvement in my skin's clarity, but I also am not that attentive to hyperpigmentation. After all, I am Black. It does have a slightly drying effect it leaves on the skin after scrubbing with it. It also does not carry a strong scent. Overall, it gets the job done (washing your body), but it is not remarkable enough for me to run back again and again for it.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">2 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 02</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Pacha Soap Co. 'The Hot Spring' Candle</div>
+            <div class="entry-body">What a remarkably disappointing candle experience! I picked this up at Whole Foods because it smelled divine and reminded me of my time abroad in spas in Asia. Much to my dismay, the candle had little to no scent when lit. I keep running into this issue with Whole Foods candles, and I am about to stop giving them the benefit of doubt. <strong>02/05 Edit:</strong> Okay, it actually does have a scent, but it is veryyyyy subtle. You have to walk out of the room and walk back in to really get the effect.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">2 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 05</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">So.Natural All Day Tight Make Up Setting Fixer</div>
+            <div class="entry-body">So, fair warning, my makeup is never transfer-proof, as of yet. So therefore if you are looking for a review that tells you whether or not this is, I'm afraid you are in the wrong place. What I can say is that I love the mist of this spray and it has no strange or strong alcohol smell. I picked up two in Korea in July 2025, and I am almost done with the first one. Unfortunately, the second was defective. Overall, a decent fixing spray. Leaves your skin dewy as you blend products but dries down almost airbrushed.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">3 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 05</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Kayali Vanilla Candy Perfume (Rock Sugar)</div>
+            <div class="entry-body">This was the immediate favorite of all the tester perfumes I purchased a while back. I'm talking right out the box. It has a sweet vanilla candy scent, just like it states, and it blends out wonderfully on my skin. It is mellow, not overly sugary, and overall my go-to when I want to give vanilla and a little something more.
+              <div class="perfume-notes"><div class="perfume-notes-label">Perfume Notes</div><div class="perfume-notes-list">Vanilla Candy · Gourmand · Candied Pear · Bubble Gum · Vanilla Cream Tonka · Sandalwood · Patchouli Marshmallow · Ylang-Ylang · Rock Sugar · Cashmere Woods</div></div>
+            </div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">4 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 09</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Beauty of Joseon Daily Tinted Fluid Sunscreen</div>
+            <div class="entry-body">This is my favorite tinted sunscreen. It is also the only tinted sunscreen I have currently tried. It blends beautifully, provides great coverage, it's just not transfer proof unless you set it (and even then, eh). I like that it has not broken me out.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="rgba(255,155,85,0.2)" stroke="#FF9B55" stroke-width="0.8"/></svg></div></div><span class="star-count">3 / 5</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-meta"><span class="entry-date">02 / 09</span><span class="entry-type-badge badge-review">Review</span></div>
+            <div class="entry-title">Numbuzin Pantothenic B5 Active Soothing Cream</div>
+            <div class="entry-body">One of the most hydrating and clarifying moisturizers I have ever used. You can tell I was scraping the pot. I bought this in South Korea after really enjoying a face mask by this brand. Money well spent.</div>
+            <div class="star-rating"><div class="stars"><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div><div class="star"><svg viewBox="0 0 14 14"><polygon points="7,1 8.8,5.3 13.5,5.6 10,8.7 11.1,13.3 7,10.8 2.9,13.3 4,8.7 0.5,5.6 5.2,5.3" fill="#FF9B55"/></svg></div></div><span class="star-count">5 / 5</span></div>
+          </div>
+          <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+        </div>
+      </div>
+
+      <!-- THOUGHTS -->
+      <div class="sub-section" id="sub-thoughts">
+        <div class="entry thoughts-entry">
+          <div class="entry-meta"><span class="entry-date">01 / 17</span><span class="entry-type-badge badge-thought">Thought</span></div>
+          <div class="entry-title">2026</div>
+          <div class="entry-body">I really am working hard in 2026 for the things I want, a trait carried over from the previous year. I had my heart set on traveling abroad for school in the summer, and the universe made it happen. This year, I'm moving away from my hometown, practicing letting go and reaffirming the value of connections at the same time, all while learning how to build my creative platforms. I'm painting more, taking care of my mental health, and always missing my youngest brother. I am endeavoring to read more than ever this year too, in a growing attempt to keep myself educated with and without formal institutions of learning.</div>
+          <div class="signoff">Love and Hearts, Spider</div>
+        </div>
+        <div class="entry thoughts-entry">
+          <div class="entry-meta"><span class="entry-date">01 / 19</span><span class="entry-type-badge badge-thought">Thought</span></div>
+          <div class="entry-title">Flowers!</div>
+          <div class="entry-body">I had a lovely date with my wife the other day. We went flower shopping, aka bouquet gifting for each other. I chose the most flowers. We had such a beautiful time and I adored it so much. Now, all the rooms of the home nearly have a bouquet of their own. In other news, I am most thankful now to have my digicam back, my treasure. All photographed on my Lumix.</div>
+          <div class="signoff">Love and Hearts, Spider</div>
+        </div>
+        <button class="back-top" onclick="scrollTo(0,0)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="11" x2="6" y2="1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><polyline points="2,5 6,1 10,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Back to Top</button>
+      </div>
+
+      <footer class="footer">
+        <span class="footer-copy">© Anyk Blog — All rights reserved</span>
+        <span class="footer-tag">curated with intention</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       CONTACT
+  ════════════════════════════════ -->
+  <div id="page-contact" class="page">
+    <div class="contact-page">
+      <div class="contact-header">
+        <p class="section-eyebrow" style="text-align:center">Connect · Follow · Subscribe</p>
+        <h1 class="section-title" style="text-align:center;font-size:clamp(28px,5vw,52px)">Find <span>Anyk</span></h1>
+        <p class="section-intro" style="text-align:center;margin:0 auto"><em>across the platforms you already love</em></p>
+      </div>
+      <div class="contact-radial">
+        <div class="contact-ring-deco cr1"></div>
+        <div class="contact-ring-deco cr2"></div>
+        <div class="contact-ring-deco cr3"></div>
+        <svg class="contact-spokes" viewBox="0 0 420 420">
+          <line x1="210" y1="50"  x2="210" y2="370" stroke="rgba(212,97,166,0.1)" stroke-width="0.5"/>
+          <line x1="50"  y1="210" x2="370" y2="210" stroke="rgba(212,97,166,0.1)" stroke-width="0.5"/>
+          <circle cx="210" cy="50"  r="2" fill="rgba(212,97,166,0.2)"/>
+          <circle cx="370" cy="210" r="2" fill="rgba(255,155,85,0.2)"/>
+          <circle cx="210" cy="370" r="2" fill="rgba(165,0,98,0.25)"/>
+          <circle cx="50"  cy="210" r="2" fill="rgba(214,41,0,0.2)"/>
+        </svg>
+        <div class="contact-center">
+          <div class="contact-center-ring"></div>
+          <span class="contact-center-text">Anyk</span>
+          <span class="contact-center-sub">links</span>
+        </div>
+        <a class="social-node sn-fable" href="https://fable.co" target="_blank">
+          <div class="social-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5L7 9h3V7h4v2h3l-5 7.5z" fill="rgba(245,184,208,0.7)"/></svg></div>
+          <span class="social-label">Fable</span>
+        </a>
+        <a class="social-node sn-insta" href="https://instagram.com/akaspiderlily" target="_blank">
+          <div class="social-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="rgba(245,184,208,0.7)" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="4.5" stroke="rgba(245,184,208,0.7)" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(245,184,208,0.7)"/></svg></div>
+          <span class="social-label">Instagram</span>
+        </a>
+        <a class="social-node sn-tiktok" href="https://tiktok.com/@akaspiderlily" target="_blank">
+          <div class="social-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M19 3h-2.5A.5.5 0 0 0 16 3.5V15a3 3 0 1 1-4-2.83V9.1A7 7 0 1 0 19 15V7.82A6.98 6.98 0 0 0 21 8V5.5A2.5 2.5 0 0 1 19 3z" stroke="rgba(245,184,208,0.7)" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg></div>
+          <span class="social-label">TikTok</span>
+        </a>
+        <a class="social-node sn-news" href="/cdn-cgi/l/email-protection#ee868b828281ae8f809785c08d81" target="_blank">
+          <div class="social-icon-wrap"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2.5" stroke="rgba(245,184,208,0.7)" stroke-width="1.4" fill="none"/><path d="M2 8l10 7 10-7" stroke="rgba(245,184,208,0.7)" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div>
+          <span class="social-label">Newsletter</span>
+        </a>
+      </div>
+    </div>
+    <footer class="footer">
+      <span class="footer-copy">© Anyk — All rights reserved</span>
+      <span class="footer-tag">curated with intention</span>
+    </footer>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── ENTRY IMAGE EXPAND ──
+    function toggleEntryImg(entry) {
+      const wrap = entry.querySelector('.entry-img-wrap');
+      const hint = entry.querySelector('.entry-img-hint');
+      if (!wrap) return;
+      const isOpen = wrap.style.display === 'block';
+      if (isOpen) {
+        wrap.style.maxHeight = '0';
+        setTimeout(() => { wrap.style.display = 'none'; }, 400);
+        if (hint) hint.textContent = 'Tap to see photo';
+      } else {
+        wrap.style.display = 'block';
+        requestAnimationFrame(() => { wrap.style.maxHeight = '600px'; });
+        if (hint) hint.textContent = 'Tap to hide photo';
+      }
+    }
+    const pages = ['home','archive','art','scitech','blog','contact'];
+    function showPage(name) {
+      pages.forEach(p => {
+        document.getElementById('page-' + p).classList.toggle('active', p === name);
+        const link = document.getElementById('nl-' + p);
+        if (link) link.classList.toggle('active', p === name);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    // ── MANDALA BLOOM ──
+    let bloomed = false;
+    function toggleBloom() {
+      const wrap = document.getElementById('mandalaWrap');
+      const hint = document.getElementById('emblemHint');
+      if (!bloomed) {
+        wrap.classList.remove('collapsing');
+        wrap.classList.add('bloomed');
+        hint.textContent = 'close';
+        bloomed = true;
+      } else {
+        wrap.classList.remove('bloomed');
+        wrap.classList.add('collapsing');
+        hint.textContent = 'explore';
+        bloomed = false;
+        setTimeout(() => wrap.classList.remove('collapsing'), 600);
+      }
+    }
+    setTimeout(() => toggleBloom(), 900);
+
+    // ── ARCHIVE CATEGORIES ──
+    function showCat(id, el) {
+      document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('visible'));
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      document.getElementById('cat-' + id).classList.add('visible');
+      el.classList.add('active');
+    }
+
+    // ── BLOG SUB-SECTIONS ──
+    function showSub(name) {
+      document.querySelectorAll('.sub-section').forEach(s => s.classList.remove('visible'));
+      document.getElementById('sub-' + name).classList.add('visible');
+      document.getElementById('btn-reviews').classList.toggle('active', name === 'reviews');
+      document.getElementById('btn-thoughts').classList.toggle('active', name === 'thoughts');
+    }
+
+    // ── BLOG MONTH NAV ──
+    function showMonth(id, el) {
+      document.querySelectorAll('.month-group').forEach(m => m.classList.remove('visible'));
+      document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active
