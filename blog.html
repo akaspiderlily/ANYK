@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANYK · Blog</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.blog-card {
+  background:rgba(45,24,16,.75);
+  border:1px solid rgba(255,184,209,.1);
+  border-left:4px solid var(--flag-pink);
+  padding:24px 26px; margin-bottom:16px;
+  text-decoration:none; display:block;
+  transition:border-color .2s, transform .2s;
+}
+.blog-card:hover { border-left-color:var(--flag-orange); transform:translateX(4px); }
+.blog-card-tag {
+  font-family:'VT323',monospace; font-size:12px;
+  letter-spacing:.35em; color:var(--flag-orange);
+  text-transform:uppercase; margin-bottom:6px;
+}
+.blog-card-title {
+  font-family:'Orbitron',sans-serif; font-size:18px;
+  font-weight:700; color:var(--pink-baby); margin-bottom:8px;
+}
+.blog-card-desc { font-size:15px; color:var(--pink-dim); font-style:italic; }
+.blog-card-arrow {
+  margin-top:12px; font-family:'VT323',monospace;
+  font-size:13px; letter-spacing:.2em; color:var(--flag-pink);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ANYK ✦</a>
+  <div class="nav-links">
+    <a href="scitech.html"  class="btn btn-or">Sci-Tech</a>
+    <a href="blog.html"     class="btn btn-pk current">Blog</a>
+    <a href="reviews.html"  class="btn btn-mg">Reviews</a>
+    <a href="thoughts.html" class="btn btn-dk">Thoughts</a>
+    <a href="archive.html"  class="btn btn-or">Archive</a>
+    <a href="findme.html"   class="btn btn-pk">Find Me</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="page-tag">// 02 //</p>
+  <h1 class="page-title">Blog</h1>
+  <div class="page-line"></div>
+  <p class="page-desc">Of course a curator has opinions and wisdom…</p>
+
+  <a href="reviews.html" class="blog-card">
+    <p class="blog-card-tag">category</p>
+    <p class="blog-card-title">Product Reviews</p>
+    <p class="blog-card-desc">Honest takes on what Maya actually buys and uses — primarily from brands in the Living Archive.</p>
+    <p class="blog-card-arrow">VIEW REVIEWS →</p>
+  </a>
+
+  <a href="thoughts.html" class="blog-card">
+    <p class="blog-card-tag">category</p>
+    <p class="blog-card-title">Thoughts &amp; Journal</p>
+    <p class="blog-card-desc">The personal stuff. Journal entries, little moments, life unfolding.</p>
+    <p class="blog-card-arrow">VIEW THOUGHTS →</p>
+  </a>
+
+  <div class="btn-row">
+    <a href="index.html" class="btn btn-or">← Home</a>
+  </div>
+</div>
+
+<footer>
+  <p>✦ ANYK ✦</p>
+  <p style="margin-top:8px;">made by Maya · anti-eugenics &amp; pro-Black always</p>
+</footer>
+
+</body>
+</html>
