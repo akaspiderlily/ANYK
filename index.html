@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANYK</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HOME-ONLY STYLES ── */
+#home {
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:100px 20px 60px;
+  position:relative; z-index:1;
+}
+.hero-title {
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(28px,7vw,80px); font-weight:900;
+  letter-spacing:0.06em; text-align:center;
+  background:linear-gradient(135deg,var(--flag-orange) 0%,var(--pink-baby) 50%,var(--flag-pink) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 24px rgba(255,184,209,0.35));
+  margin-bottom:6px; animation:glitch 9s infinite;
+}
+.hero-sub {
+  font-family:'Crimson Pro',serif; font-style:italic;
+  color:var(--flag-orange); text-align:center;
+  font-size:clamp(13px,2.2vw,19px); letter-spacing:0.12em;
+  opacity:.82; margin-bottom:10px;
+}
+.hero-tagline {
+  font-family:'VT323',monospace;
+  font-size:clamp(13px,2vw,17px);
+  color:rgba(255,184,209,0.5); letter-spacing:0.22em;
+  text-align:center; text-transform:uppercase; margin-bottom:50px;
+}
+@keyframes glitch {
+  0%,94%,100%{ filter:drop-shadow(0 0 24px rgba(255,184,209,0.35)); }
+  95%{ filter:drop-shadow(-3px 0 var(--flag-red)) drop-shadow(3px 0 var(--flag-pink)); }
+  96%{ filter:drop-shadow(3px 0 var(--flag-red)) drop-shadow(-3px 0 var(--flag-pink)); }
+  97%{ filter:drop-shadow(0 0 24px rgba(255,184,209,0.35)); }
+  98%{ filter:drop-shadow(-2px 0 var(--flag-orange)); }
+  99%{ filter:drop-shadow(0 0 24px rgba(255,184,209,0.35)); }
+}
+.mandala-wrapper {
+  width:min(560px,88vw); height:min(560px,88vw); margin:0 auto 30px;
+}
+#mandala-svg {
+  width:100%; height:100%; overflow:visible;
+  filter:drop-shadow(0 0 40px rgba(181,86,144,0.35));
+}
+.m-ring  { transform-origin:300px 300px; animation:rotCW  35s linear infinite; }
+.m-ring-r{ transform-origin:300px 300px; animation:rotCCW 22s linear infinite; }
+@keyframes rotCW  { to{ transform:rotate(360deg);  } }
+@keyframes rotCCW { to{ transform:rotate(-360deg); } }
+.petal { cursor:pointer; }
+.petal:hover .petal-fill  { filter:brightness(1.45) saturate(1.3); }
+.petal:hover .petal-label { fill:#FFF; }
+.hint {
+  font-family:'VT323',monospace; font-size:14px;
+  letter-spacing:.25em; color:rgba(255,184,209,.35);
+  text-transform:uppercase; text-align:center; margin-top:8px;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ANYK ✦</a>
+  <div class="nav-links">
+    <a href="scitech.html"  class="btn btn-or">Sci-Tech</a>
+    <a href="blog.html"     class="btn btn-pk">Blog</a>
+    <a href="reviews.html"  class="btn btn-mg">Reviews</a>
+    <a href="thoughts.html" class="btn btn-dk">Thoughts</a>
+    <a href="archive.html"  class="btn btn-or">Archive</a>
+    <a href="findme.html"   class="btn btn-pk">Find Me</a>
+  </div>
+</nav>
+
+<section id="home">
+  <p class="hero-tagline">// and now you know //</p>
+  <h1 class="hero-title">ANYK</h1>
+  <p class="hero-sub">as an African-Indigenous person, inventions are made without us in mind, yet…</p>
+
+  <div class="mandala-wrapper">
+    <svg id="mandala-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow-sm">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-lg">
+          <feGaussianBlur stdDeviation="8" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="cg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#3F2318"/>
+          <stop offset="100%" stop-color="#0A0503"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+  <p class="hint">click a petal to explore</p>
+</section>
+
+<footer>
+  <p>✦ ANYK ✦</p>
+  <p style="margin-top:8px;">made by Maya · <a href="https://anyk.carrd.co/" target="_blank">old site</a> · anti-eugenics &amp; pro-Black always</p>
+  <p style="margin-top:6px;font-size:12px;color:rgba(255,184,209,.18);">built for GitHub Pages · pure HTML · no tracking</p>
+</footer>
+
+<script>
+(function(){
+  const svg = document.getElementById('mandala-svg');
+  const NS = 'http://www.w3.org/2000/svg';
+  const CX=300, CY=300, RI=98, RO=228, RL=167;
+
+  const PAGES = [
+    { href:'scitech.html',  label:'SCI-TECH', color:'#D52D00' },
+    { href:'archive.html',  label:'ARCHIVE',  color:'#FF9A56' },
+    { href:'reviews.html',  label:'REVIEWS',  color:'#FFB8D1' },
+    { href:'thoughts.html', label:'THOUGHTS', color:'#D162A4' },
+    { href:'blog.html',     label:'BLOG',     color:'#B55690' },
+    { href:'findme.html',   label:'FIND ME',  color:'#E8407A' },
+  ];
+
+  const rad = d => d * Math.PI / 180;
+  const pt  = (r,d) => ({ x: CX + r*Math.cos(rad(d)), y: CY + r*Math.sin(rad(d)) });
+
+  function arc(ri,ro,s,e){
+    const lg = (e-s)>180?1:0;
+    const a=pt(ri,s),b=pt(ro,s),c=pt(ro,e),d=pt(ri,e);
+    return `M${a.x},${a.y}L${b.x},${b.y}A${ro},${ro},0,${lg},1,${c.x},${c.y}L${d.x},${d.y}A${ri},${ri},0,${lg},0,${a.x},${a.y}Z`;
+  }
+
+  function el(tag,attrs){
+    const e=document.createElementNS(NS,tag);
+    Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+    return e;
+  }
+
+  /* outer rotating ring */
+  const ring = el('g',{class:'m-ring'});
+  ring.appendChild(el('circle',{cx:CX,cy:CY,r:258,fill:'none',stroke:'rgba(255,184,209,0.18)','stroke-width':'1','stroke-dasharray':'6 8'}));
+  for(let a=0;a<360;a+=15){
+    const i=pt(250,a),o=pt(265,a);
+    ring.appendChild(el('line',{x1:i.x,y1:i.y,x2:o.x,y2:o.y,stroke:a%60===0?'rgba(255,154,86,0.55)':'rgba(255,184,209,0.2)','stroke-width':a%60===0?'2.5':'1'}));
+  }
+  PAGES.forEach((_,i)=>{
+    const a=i*60-90+30, p=pt(272,a);
+    ring.appendChild(el('polygon',{points:`${p.x},${p.y-5} ${p.x+4},${p.y} ${p.x},${p.y+5} ${p.x-4},${p.y}`,fill:PAGES[i].color,opacity:'0.7'}));
+  });
+  svg.appendChild(ring);
+
+  /* inner counter-rotating ring */
+  const ring2=el('g',{class:'m-ring-r'});
+  ring2.appendChild(el('circle',{cx:CX,cy:CY,r:82,fill:'none',stroke:'rgba(255,184,209,0.12)','stroke-width':'1','stroke-dasharray':'4 10'}));
+  for(let a=0;a<360;a+=30){
+    const p1=pt(76,a),p2=pt(84,a);
+    ring2.appendChild(el('line',{x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y,stroke:'rgba(255,154,86,0.35)','stroke-width':'1.5'}));
+  }
+  svg.appendChild(ring2);
+
+  /* petals */
+  const GAP=5;
+  PAGES.forEach((page,i)=>{
+    const s=i*60-90+GAP/2, e=s+60-GAP, mid=(s+e)/2;
+    const g=el('g',{class:'petal'});
+
+    /* hover glow */
+    const glow=el('path',{d:arc(RI-8,RO+8,s,e),fill:page.color,opacity:'0',filter:'url(#glow-lg)'});
+    g.appendChild(glow);
+
+    /* fill */
+    g.appendChild(el('path',{d:arc(RI,RO,s,e),fill:page.color,class:'petal-fill',opacity:'0.88'}));
+    /* border */
+    g.appendChild(el('path',{d:arc(RI,RO,s,e),fill:'none',stroke:'rgba(255,255,255,0.18)','stroke-width':'1'}));
+
+    /* label */
+    const lp=pt(RL,mid);
+    const lbl=el('text',{x:lp.x,y:lp.y,'text-anchor':'middle','dominant-baseline':'middle',
+      fill:'#0A0503','font-family':'Orbitron, sans-serif','font-size':'9','font-weight':'700',
+      'letter-spacing':'0.08em',class:'petal-label',transform:`rotate(${mid+90},${lp.x},${lp.y})`});
+    lbl.textContent=page.label;
+    g.appendChild(lbl);
+
+    g.addEventListener('click', ()=>{ window.location.href = page.href; });
+    g.addEventListener('mouseenter',()=>glow.setAttribute('opacity','0.25'));
+    g.addEventListener('mouseleave',()=>glow.setAttribute('opacity','0'));
+    svg.appendChild(g);
+  });
+
+  /* spokes */
+  PAGES.forEach((_,i)=>{
+    const a=i*60-90+30, p1=pt(84,a), p2=pt(RI,a);
+    svg.appendChild(el('line',{x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y,stroke:'rgba(255,184,209,0.08)','stroke-width':'1','stroke-dasharray':'3 5'}));
+  });
+
+  /* center circle */
+  svg.appendChild(el('circle',{cx:CX,cy:CY,r:92,fill:'url(#cg)',stroke:'rgba(255,184,209,0.2)','stroke-width':'1.5'}));
+  svg.appendChild(el('circle',{cx:CX,cy:CY,r:88,fill:'none',stroke:'rgba(209,98,164,0.3)','stroke-width':'2',filter:'url(#glow-sm)'}));
+
+  const t=el('text',{x:CX,y:CY-10,'text-anchor':'middle','dominant-baseline':'middle',
+    fill:'#FFB8D1','font-family':'Orbitron, sans-serif','font-size':'11','font-weight':'900',
+    'letter-spacing':'0.18em',filter:'url(#glow-sm)'});
+  t.textContent='ANYK';
+  svg.appendChild(t);
+
+  const s2=el('text',{x:CX,y:CY+12,'text-anchor':'middle','dominant-baseline':'middle',
+    fill:'rgba(255,154,86,0.7)','font-family':'Orbitron, sans-serif','font-size':'7','letter-spacing':'0.2em'});
+  s2.textContent='xyz';
+  svg.appendChild(s2);
+})();
+</script>
+</body>
+</html>
