@@ -27,13 +27,35 @@
   font-family:'Crimson Pro',serif; font-style:italic;
   color:var(--flag-orange); text-align:center;
   font-size:clamp(13px,2.2vw,19px); letter-spacing:0.12em;
-  opacity:.82; margin-bottom:10px;
+  opacity:.82; margin-bottom:6px;
 }
 .hero-tagline {
   font-family:'VT323',monospace;
   font-size:clamp(13px,2vw,17px);
   color:rgba(255,184,209,0.5); letter-spacing:0.22em;
   text-align:center; text-transform:uppercase; margin-bottom:50px;
+}
+.hero-secondary {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(14px, 2.4vw, 20px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--flag-pink);
+  text-align: center;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  margin-bottom: 50px;
+  position: relative;
+}
+.hero-secondary::before,
+.hero-secondary::after {
+  content: '✦';
+  font-style: normal;
+  font-size: 0.65em;
+  color: var(--flag-orange);
+  opacity: 0.7;
+  margin: 0 10px;
+  vertical-align: middle;
 }
 @keyframes glitch {
   0%,94%,100%{ filter:drop-shadow(0 0 24px rgba(255,184,209,0.35)); }
@@ -79,9 +101,9 @@
 </nav>
 
 <section id="home">
-  <p class="hero-tagline">// and now you know //</p>
+  <p class="hero-tagline">// and now you know, love //</p>
   <h1 class="hero-title">ANYK</h1>
-  <p class="hero-sub">as an African-Indigenous person, inventions are made without us in mind, yet…</p>
+  <p class="hero-secondary">African, Indigenous, and Pacific Islander centered</p>
 
   <div class="mandala-wrapper">
     <svg id="mandala-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -106,8 +128,7 @@
 
 <footer>
   <p>✦ ANYK ✦</p>
-  <p style="margin-top:8px;">made by Maya · <a href="https://anyk.carrd.co/" target="_blank">old site</a> · anti-eugenics &amp; pro-Black always</p>
-  <p style="margin-top:6px;font-size:12px;color:rgba(255,184,209,.18);">built for GitHub Pages · pure HTML · no tracking</p>
+  <p style="margin-top:8px;">made by Spider</p>
 </footer>
 
 <script>
