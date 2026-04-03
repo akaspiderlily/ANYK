@@ -7,83 +7,36 @@
 <link rel="stylesheet" href="style.css">
 <style>
 .year-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: 44px 0 6px;
+  display:flex; align-items:center; gap:16px; margin:44px 0 6px;
 }
-.year-header:first-of-type { margin-top: 0; }
+.year-header:first-of-type { margin-top:0; }
 .year-label {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  background: linear-gradient(135deg, var(--flag-orange), var(--flag-pink));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 10px rgba(255,154,86,0.3));
+  font-family:'Orbitron',sans-serif; font-size:28px; font-weight:900;
+  letter-spacing:0.12em;
+  background:linear-gradient(135deg,var(--flag-orange),var(--flag-pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 10px rgba(255,154,86,0.3));
 }
-.year-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--flag-orange), transparent);
-  opacity: 0.35;
-}
-.month-acc {
-  margin-bottom: 8px;
-  border: 1px solid rgba(255,184,209,0.1);
-}
+.year-line { flex:1; height:1px; background:linear-gradient(90deg,var(--flag-orange),transparent); opacity:0.35; }
+.month-acc { margin-bottom:8px; border:1px solid rgba(255,184,209,0.1); }
 .month-acc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 20px;
-  cursor: pointer;
-  background: rgba(45,24,16,0.6);
-  border-left: 4px solid var(--flag-pink);
-  transition: background 0.2s, border-color 0.2s;
-  user-select: none;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 20px; cursor:pointer; background:rgba(45,24,16,0.6);
+  border-left:4px solid var(--flag-pink);
+  transition:background 0.2s, border-color 0.2s; user-select:none;
 }
-.month-acc-header:hover,
-.month-acc-header.open {
-  background: rgba(63,35,24,0.85);
-  border-left-color: var(--flag-orange);
+.month-acc-header:hover, .month-acc-header.open {
+  background:rgba(63,35,24,0.85); border-left-color:var(--flag-orange);
 }
 .month-name {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--pink-baby);
-  text-transform: uppercase;
+  font-family:'Orbitron',sans-serif; font-size:14px; font-weight:700;
+  letter-spacing:0.12em; color:var(--pink-baby); text-transform:uppercase;
 }
-.month-count {
-  font-family: 'VT323', monospace;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--flag-orange);
-  margin-left: 12px;
-}
-.month-arrow {
-  font-family: 'VT323', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--flag-pink);
-  transition: color 0.2s;
-}
-.month-acc-header:hover .month-arrow,
-.month-acc-header.open .month-arrow { color: var(--flag-orange); }
-.month-acc-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.55s ease, padding 0.4s ease;
-  padding: 0;
-}
-.month-acc-body.open {
-  max-height: 9999px;
-  padding: 16px 0 4px;
-}
+.month-count { font-family:'VT323',monospace; font-size:13px; letter-spacing:0.2em; color:var(--flag-orange); margin-left:12px; }
+.month-arrow { font-family:'VT323',monospace; font-size:11px; letter-spacing:0.1em; color:var(--flag-pink); transition:color 0.2s; }
+.month-acc-header:hover .month-arrow, .month-acc-header.open .month-arrow { color:var(--flag-orange); }
+.month-acc-body { max-height:0; overflow:hidden; transition:max-height 0.55s ease, padding 0.4s ease; padding:0; }
+.month-acc-body.open { max-height:9999px; padding:16px 0 4px; }
 </style>
 </head>
 <body>
@@ -92,7 +45,7 @@
   <a href="index.html" class="nav-logo">ANYK ✦</a>
   <div class="nav-links">
     <a href="scitech.html"  class="btn btn-or">Sci-Tech</a>
-    <a href="blog.html"     class="btn btn-pk">Blog</a>
+    <a href="chat.html"     class="btn btn-pk">Chat</a>
     <a href="reviews.html"  class="btn btn-mg current">Reviews</a>
     <a href="thoughts.html" class="btn btn-dk">Thoughts</a>
     <a href="archive.html"  class="btn btn-or">Archive</a>
@@ -250,23 +203,22 @@
     </div>
   </div><!-- /february -->
 
-  <!-- ════ TO ADD A NEW MONTH, COPY THIS BLOCK ════
+  <!-- ── APRIL ── -->
   <div class="month-acc">
     <div class="month-acc-header" onclick="toggleMonth(this)">
       <div style="display:flex;align-items:center;">
-        <span class="month-name">March</span>
+        <span class="month-name">April</span>
         <span class="month-count">· 0 reviews</span>
       </div>
       <span class="month-arrow">▼ OPEN</span>
     </div>
     <div class="month-acc-body">
-      ... paste review divs here ...
+      <p style="font-size:16px;color:var(--pink-dim);font-style:italic;padding:0 22px 16px;">Reviews coming soon. ✦</p>
     </div>
-  </div>
-  ═══════════════════════════════════════════════ -->
+  </div><!-- /april -->
 
   <div class="btn-row">
-    <a href="blog.html"     class="btn btn-dk">← Blog</a>
+    <a href="chat.html"     class="btn btn-dk">← Chat</a>
     <a href="thoughts.html" class="btn btn-pk">Thoughts →</a>
     <a href="index.html"    class="btn btn-or">⌂ Home</a>
   </div>

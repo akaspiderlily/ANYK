@@ -92,7 +92,7 @@
   <a href="index.html" class="nav-logo">ANYK ✦</a>
   <div class="nav-links">
     <a href="scitech.html"  class="btn btn-or">Sci-Tech</a>
-    <a href="blog.html"     class="btn btn-pk">Blog</a>
+    <a href="chat.html"     class="btn btn-pk">Chat</a>
     <a href="reviews.html"  class="btn btn-mg">Reviews</a>
     <a href="thoughts.html" class="btn btn-dk">Thoughts</a>
     <a href="archive.html"  class="btn btn-or">Archive</a>
@@ -142,7 +142,7 @@
     { href:'archive.html',  label:'ARCHIVE',  color:'#FF9A56' },
     { href:'reviews.html',  label:'REVIEWS',  color:'#FFB8D1' },
     { href:'thoughts.html', label:'THOUGHTS', color:'#D162A4' },
-    { href:'blog.html',     label:'BLOG',     color:'#B55690' },
+    { href:'chat.html',     label:'CHAT',     color:'#B55690' },
     { href:'findme.html',   label:'FIND ME',  color:'#E8407A' },
   ];
 
@@ -222,16 +222,12 @@
   svg.appendChild(el('circle',{cx:CX,cy:CY,r:92,fill:'url(#cg)',stroke:'rgba(255,184,209,0.2)','stroke-width':'1.5'}));
   svg.appendChild(el('circle',{cx:CX,cy:CY,r:88,fill:'none',stroke:'rgba(209,98,164,0.3)','stroke-width':'2',filter:'url(#glow-sm)'}));
 
-  const t=el('text',{x:CX,y:CY-10,'text-anchor':'middle','dominant-baseline':'middle',
+  const t=el('text',{x:CX,y:CY,'text-anchor':'middle','dominant-baseline':'middle',
     fill:'#FFB8D1','font-family':'Orbitron, sans-serif','font-size':'11','font-weight':'900',
     'letter-spacing':'0.18em',filter:'url(#glow-sm)'});
   t.textContent='ANYK';
   svg.appendChild(t);
 
-  const s2=el('text',{x:CX,y:CY+12,'text-anchor':'middle','dominant-baseline':'middle',
-    fill:'rgba(255,154,86,0.7)','font-family':'Orbitron, sans-serif','font-size':'7','letter-spacing':'0.2em'});
-  s2.textContent='xyz';
-  svg.appendChild(s2);
 })();
 </script>
 </body>
