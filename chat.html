@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANYK · Chat</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.chat-intro {
+  font-size:17px; color:var(--pink-dim); font-style:italic; margin-bottom:8px;
+}
+.chat-note {
+  font-family:'VT323',monospace; font-size:13px;
+  letter-spacing:.22em; color:rgba(255,184,209,.3);
+  text-transform:uppercase; margin-bottom:36px;
+}
+.giscus-wrap {
+  border:1px solid rgba(255,184,209,0.1);
+  border-left:4px solid var(--flag-pink);
+  padding:24px 20px;
+  background:rgba(24,12,7,0.6);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ANYK ✦</a>
+  <div class="nav-links">
+    <a href="scitech.html"  class="btn btn-or">Sci-Tech</a>
+    <a href="chat.html"     class="btn btn-pk current">Chat</a>
+    <a href="reviews.html"  class="btn btn-mg">Reviews</a>
+    <a href="thoughts.html" class="btn btn-dk">Thoughts</a>
+    <a href="archive.html"  class="btn btn-or">Archive</a>
+    <a href="findme.html"   class="btn btn-pk">Find Me</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="page-tag">// 02 //</p>
+  <h1 class="page-title">Chat</h1>
+  <div class="page-line"></div>
+  <p class="chat-intro">Leave a message, ask a question, say hi. All messages are visible to everyone.</p>
+  <p class="chat-note">// requires a free github account to post //</p>
+
+  <div class="giscus-wrap">
+
+    <!-- =====================================================
+         PASTE YOUR GISCUS SCRIPT TAG HERE
+         replacing this comment block.
+
+         To get it:
+         1. Go to your repo → Settings → Features → enable Discussions
+         2. Visit https://giscus.app
+         3. Type: akaspiderlily/ANYK in the Repository field
+         4. Set Discussion Category to: General
+         5. Set Theme to: dark_dimmed
+         6. Copy the generated <script> tag and paste it here
+
+         To delete a comment:
+         Go to github.com/akaspiderlily/ANYK/discussions
+         find the post → click ··· → Delete
+    ===================================================== -->
+
+    <script src="https://giscus.app/client.js"
+            data-repo="akaspiderlily/ANYK"
+            data-repo-id="PASTE_REPO_ID"
+            data-category="General"
+            data-category-id="PASTE_CATEGORY_ID"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="dark_dimmed"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+  </div>
+
+  <div class="btn-row">
+    <a href="index.html" class="btn btn-or">⌂ Home</a>
+  </div>
+</div>
+
+<footer>
+  <p>✦ ANYK ✦</p>
+  <p style="margin-top:8px;">made by Spider</p>
+</footer>
+
+</body>
+</html>
